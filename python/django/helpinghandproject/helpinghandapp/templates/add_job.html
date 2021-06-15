@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2><center>Hello, {{ request.session.username }}! Create a new Job!</center></h2>    <div class="text-right">
+        <a href="/jobs">Home</a> |
+        <a href="/logout">Logout</a></div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <form action="/jobs/add" method="POST">
+                {% csrf_token %}
+                <p>Job Title: <input type="text" name="job_title" /></p> 
+                <p style="color:#FF0000;">{% if errors.job_title %}
+                    {{ errors.job_title  }}
+                {% endif %}
+                </p>
+                Job Description:  
+                <textarea
+                    name="job_desc"
+                    cols="30"
+                    rows="10"
+                    style="resize: none;"
+                  ></textarea>
+                <p style="color:#FF0000;">{% if errors.job_desc %}
+                    {{ errors.job_desc  }}
+                {% endif %}
+                </p>
+                <p>Location: <input type="text" name="job_location" /></p>
+                <p style="color:#FF0000;">{% if errors.job_location %}
+                    {{ errors.job_location  }}
+                {% endif %}</p>
+                <button type="submit">Add Job</button>
+
+            </form>
+        </div>
+    </div>
+  </body>
+</html>
+

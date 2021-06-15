@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'js/script.js' %}"></script>
+  </head>
+  <body>
+    <img src="{% static '\img\454.jpg' %}" />
+  </body>
+
+  <h1>Index Page</h1>
+<h3>Create a User</h3>
+<form action='/users' method='post'>
+    {% csrf_token %}
+    Name: <input type='text' name='name'>    <br><br>
+    Email: <input type='text' name='email'>    <br><br>
+
+    <label for="location">Dojo Location:</label>
+    <select name="location" id="location">
+      <option value="San Jose">San Jose</option>
+      <option value="San Francisco">San Francisco</option>
+      <option value="Oakland">Oakland</option>
+      <option value="Los Angeles">Los Angeles</option>
+    </select>
+    <br>
+    <br>
+
+    <label for="language">Favorite Language:</label>
+    <select name="language" id="language">
+      <option value="Python">Python</option>
+      <option value="HTML & CSS">HTML and CSS</option>
+      <option value="MERN">MERN</option>
+      <option value="Java">Java</option>
+    </select>
+    <br>
+    <br>
+
+    <label for="comment">Comments:</label>
+    <textarea id="comment" name="comment" rows="4" cols="50">
+    </textarea>
+    <br>
+    <br>
+
+    <button type='submit'>Submit</button>
+</form>
+  <p>time: {{time}}</p>
+
+  <ul>
+
+  </ul>
+</html>

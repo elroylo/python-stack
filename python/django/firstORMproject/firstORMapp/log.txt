@@ -1,0 +1,107 @@
+In [1]: from firstORMapp.models import *
+
+In [2]: users.objects.create(first_name = "Elroy", last_name = "Lobo", email_address =  
+   ...: "elroylobo@live.com", age = 20)
+Out[2]: <users: users object (1)>
+
+In [3]: users.objects.create(first_name = "John", last_name = "Smith", email_address =  
+   ...: "n/a", age = 10)
+Out[3]: <users: users object (2)>
+
+In [4]: users.objects.create(first_name = "George", last_name = "Arias", email_address  
+   ...: = "garias@gmail.com", age = 25)
+Out[4]: <users: users object (3)>
+
+In [5]: users.objects.all()
+Out[5]: <QuerySet [<users: users object (1)>, <users: users object (2)>, <users: users object (3)>]>
+
+In [6]: users.objects.first()
+Out[6]: <users: users object (1)>
+
+In [7]: users.objects.last()
+Out[7]: <users: users object (3)>
+
+In [8]: users.objects.get(id=2)
+Out[8]: <users: users object (2)>
+
+In [9]: user.objects.get(id=3)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-9-ec6daa82f4cb> in <module>
+----> 1 user.objects.get(id=3)
+
+NameError: name 'user' is not defined
+
+In [10]: u = users.objects.get(id=3)
+
+In [11]: u.last_name = "pancakes"
+
+In [12]: u.save()
+
+In [13]: x = users.objects.get(id=2)
+
+In [14]: u.delete()
+Out[14]: (1, {'firstORMapp.users': 1})
+
+In [15]: users.objects.all()
+Out[15]: <QuerySet [<users: users object (1)>, <users: users object (2)>]>
+
+In [16]: users.objects.create(first_name = "George", last_name = "Arias", email_address 
+    ...:  = "garias@gmail.com", age = 25)
+Out[16]: <users: users object (4)>
+
+In [17]: u = users.objects.get(id=3)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-17-8016b230a720> in <module>
+----> 1 u = users.objects.get(id=3)
+
+C:\Program Files\Python38\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)      
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Program Files\Python38\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    413             return clone._result_cache[0]
+    414         if not num:
+--> 415             raise self.model.DoesNotExist(
+    416                 "%s matching query does not exist." %
+    417                 self.model._meta.object_name
+
+DoesNotExist: users matching query does not exist.
+
+In [18]: y = users.objects.get(id=3)
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-18-c281cb3a7d98> in <module>
+----> 1 y = users.objects.get(id=3)
+
+C:\Program Files\Python38\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)      
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Program Files\Python38\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    413             return clone._result_cache[0]
+    414         if not num:
+--> 415             raise self.model.DoesNotExist(
+    416                 "%s matching query does not exist." %
+    417                 self.model._meta.object_name
+
+DoesNotExist: users matching query does not exist.
+
+In [19]: y = users.objects.get(id=4)
+
+In [20]: y.last_name = "pancakes"
+
+In [21]: y.save()
+
+In [22]: x.delete()
+Out[22]: (1, {'firstORMapp.users': 1})
+
+In [23]: users.objects.all()
+Out[23]: <QuerySet [<users: users object (1)>, <users: users object (4)>]>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello, {{ request.session.username }}</h1>
+    <div class="text-right">
+        <a href="/jobs/add" style="text-align:right;">Add Job</a> |
+        <a href="/logout">Logout</a></div>
+    <table class="table table-sm" style="width:800px">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Location</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for j in job %}
+            <tr>
+                <th scope="row">{{  j.id  }}</th>
+                <td> {{ j.job_title }}</td>
+                <td> {{ j.job_location }}</td>
+                <td> {% if j.user_who_owns_this.id == entire_logged_in_user_object.id  %}<a href="/jobs/edit/{{  j.id  }}"> Edit</a> | 
+                <a href="/jobs/remove/{{  j.id  }}"> Delete </a> |
+                {% endif %}
+                <a href="/jobs/view/{{  j.id  }}"> View </a>
+                </td>
+
+            </tr> 
+                {% endfor %}
+          
+        </tbody>
+      </table>
+
+  </body>
+</html>
+
+
+
+

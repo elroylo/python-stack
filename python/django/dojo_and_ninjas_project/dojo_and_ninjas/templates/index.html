@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-6 shadow-sm">
+            <div class="card-body">
+                <h3>Add a Dojo</h3>
+                <form action='create_dojo' method='post'>
+                    {% csrf_token %}
+                    Name: <input type='text' name='name'>
+                    <br><br> 
+                    City: <input type='text' name='city'>    
+                    <br><br>
+                    State: <input type='text' name='state'>    
+                    <br><br>
+                    <button type='submit'>Add</button>
+                    </form>
+                <div class="d-flex justify-content-between align-items-center">
+                </div>
+                <small class="text-muted">Bootstrap</small>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-6 shadow-sm">
+                <div class="card-body">
+                    <h3>Add a Ninja</h3>
+                    <form action='create_ninja' method='post'>
+                        {% csrf_token %}
+                        First Name: <input type='text' name='first_name'> 
+                        <br><br>
+                        Last Name: <input type='text' name='last_name'>    
+                        <br><br>
+                        Dojo: 
+                        <select name = "dojo_id">
+                            {% for dojo in all_the_dojos %}
+                            <option value = "{{dojo.id}}"> {{dojo.name}}</option>                      
+                            {% endfor %}
+                        </select> 
+                        <br>
+                        <button type='submit'>Add</button>  
+                        </form> 
+                    <div class="d-flex justify-content-between align-items-center">
+                    </div>
+                    <small class="text-muted">Bootstrap</small>
+                    </div>
+                </div>
+            </div>
+    </div>      
+                <ul>{% for dojo in all_the_dojos %}
+
+                    <li>{{dojo.name}},                      
+                    {{dojo.city }},
+                    {{dojo.state}}
+                    <ul>{% for ninja in dojo.ninjas.all %}
+
+                        <li>{{ninja.first_name}},                      
+                            {{ninja.last_name}}
+
+                    {% endfor %}</ul>  
+
+                    {% endfor %}</ul>
+
+</body>
+</html>

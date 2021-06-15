@@ -1,0 +1,5 @@
+1. pip list - displays a list of python packages
+2. deactivate - deactivates virtual enviroment
+3. pip3 list - displays a list of python packages for no virtual environment
+4. pip install django - installs django
+5. pip freeze - like pip list, except shows the packages we have
